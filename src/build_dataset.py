@@ -7,7 +7,7 @@ Inputs
   data/external/mps_28th_term_wikipedia.csv                (MPs elected on 14 May 2023, Turkish Wikipedia)
 
 Outputs
-  data/processed/daily_panel.csv.gz      one row per (account, day): followers, friends, tweets, listed, favourites
+  data/processed/daily_panel_YYYY.csv.gz one row per (account, day): followers, friends, tweets, listed, favourites
   data/processed/accounts.csv            one row per political account with party, role, election outcome
   data/processed/account_features.csv    per-account growth features for the hypothesis tests
 
@@ -119,7 +119,9 @@ def main():
     base = growth(daily, pd.Timestamp("2022-12-01"), pd.Timestamp("2023-02-05")).add_prefix("baseline_")
     feats = accounts.set_index("id").join([camp, base], how="left")
 
-    daily.to_csv(OUT / "daily_panel.csv.gz", index=False, compression="gzip")
+    # split by year so each file stays small enough for GitHub's web uploader
+    for year, part in daily.groupby(daily["date"].dt.year):
+        part.to_csv(OUT / f"daily_panel_{year}.csv.gz", index=False, compression="gzip")
     accounts.to_csv(OUT / "accounts.csv", index=False)
     feats.reset_index().to_csv(OUT / "account_features.csv", index=False)
     print(f"daily rows: {len(daily):,} | accounts: {len(accounts):,} | "
