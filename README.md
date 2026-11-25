@@ -88,7 +88,7 @@ The two groups move in parallel through the whole campaign and **separate only a
 ├── data/
 │   ├── raw/          # #Secim2023 profile snapshots + account list (as downloaded)
 │   ├── external/     # candidates_2023.csv (OCR'd official lists), 28th-term MP list
-│   └── processed/    # daily panel, accounts, features, candidates_linked (built by src/)
+│   └── processed/    # daily panel (split by year), accounts, features, candidates_linked (built by src/)
 ├── figures/          # all charts in this README
 ├── notebooks/
 │   ├── 01_eda.ipynb                     # accounts, parties, events
