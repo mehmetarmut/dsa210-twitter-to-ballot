@@ -1,0 +1,14 @@
+# large raw files that are not used (re-download with src/download_data.py)
+data/raw/trends/
+data/raw/tweets/
+data/raw/networks/
+
+# python / jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+build/
+data/raw/resmi_gazete_*.pdf
